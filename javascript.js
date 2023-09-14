@@ -1,42 +1,55 @@
-function getRandomInt(min, max) { //Random number function
-    min = Math.ceil(1);
-    max = Math.floor(100);
-    return Math.floor(Math.random() * (max - min) + min);
-}
-function getComputerChoice() {  //Assignes choosen random number to possible value 
-    let value = getRandomInt();
-    if (value >= 1 && value < 33) {
-        return "rock";
-    } else if (value >= 33 && value < 66) {
-        return "paper";
-    } else {
-        return "scissors";
-    }
-
+function getComputerChoice() {
+  const selectedComputer = Math.floor(Math.random() * option.length);    
+  return option[selectedComputer];
 }
 
-
-
+const option = ["paper", "rock", "scissors"];
 const playerSelection = "paper";
 const newSelection = playerSelection.toLowerCase();
 const computerSelection = getComputerChoice();
-console.log(computerSelection);
-console.log(newSelection);
+let playerScore = 0;
+let computerScore = 0;
+let rounds = 0;
+
 
 function playGame(newSelection,computerSelection) {
-    if (newSelection === computerSelection) {
-        return "TIE";
-    } else if (newSelection === "rock" && computerSelection === "scissors") {
-        return "You Win!";
-    } else if (newSelection === "paper" && computerSelection === "rock") {
-        return "You Win!";
-    } else if (newSelection === "scissors" && computerSelection === "paper") {
-        return "You Win!";
-    } else {
-        return "You Lose!";
-    }
+  if (newSelection === computerSelection) {
+      return "This round you tied!";
+  } else if (newSelection === "rock" && computerSelection === "scissors") {
+      ++playerScore && ++rounds;
+      return "Congratulations, Rock Beats Scissors!"
+  } else if (newSelection === "paper" && computerSelection === "rock") {
+      ++playerScore && ++rounds;
+      return "Congratulations, Paper Beats Rock!"
+  } else if (newSelection === "scissors" && computerSelection === "paper") {
+      ++playerScore && ++rounds;
+      return "Congratulations, Scissors Beats Paper!"
+  } else {
+      ++computerScore && ++rounds;
+      return "Computer beat you this round!"
+  }
+  
 }
-console.log(playGame(newSelection, computerSelection));
 
 
 
+function game() {
+  while (rounds < 5) {
+    const playerSelection = prompt("Enter your choice: Rock, Paper or Scissors!");
+    const newSelection = playerSelection.toLowerCase();
+    const computerSelection = getComputerChoice();
+    const result = playGame(newSelection,computerSelection);
+   console.log(result + "" + "Computer Choose:" + computerSelection);
+   console.log("Player Score: " + playerScore);
+   console.log("Computer Score: " + computerScore);
+  }
+  if (playerScore >= 3) {
+    console.log("Congratulations! You won the game!");
+  } else {
+    console.log("Computer won the game!");
+  }
+
+  
+
+}
+game();
