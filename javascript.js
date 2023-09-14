@@ -1,4 +1,4 @@
-function getComputerChoice() {
+function getComputerChoice() {                                             
   const selectedComputer = Math.floor(Math.random() * option.length);    
   return option[selectedComputer];
 }
@@ -34,7 +34,7 @@ function playGame(newSelection,computerSelection) {
 
 
 function game() {
-  while (rounds < 5) {
+  for (let rounds = 0; rounds < 5; rounds++) {
     const playerSelection = prompt("Enter your choice: Rock, Paper or Scissors!");
     const newSelection = playerSelection.toLowerCase();
     const computerSelection = getComputerChoice();
@@ -42,11 +42,14 @@ function game() {
    console.log(result + "" + "Computer Choose:" + computerSelection);
    console.log("Player Score: " + playerScore);
    console.log("Computer Score: " + computerScore);
+   
   }
-  if (playerScore >= 3) {
+  if (playerScore > computerScore) {
     console.log("Congratulations! You won the game!");
-  } else {
+  } else if (computerScore > playerScore) {
     console.log("Computer won the game!");
+  } else {
+    console.log("Game ends in a tie!");
   }
 
   
